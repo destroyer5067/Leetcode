@@ -1,16 +1,49 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
 class Solution {
 public:
-    int removePalindromeSub(string s) {
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         
-        int n=s.size();
         
-        for(int i=0;i<n/2;++i)
+        ListNode* dummy=new ListNode();
+        ListNode* temp=dummy;
+        
+        int carry=0;
+        
+        while(l1!=NULL || l2!=NULL || carry)
         {
-            if(s[i]!=s[n-1-i])
-            return 2;
+            int sum=0;
+            
+            if(l1!=NULL)
+            {
+                sum+=l1->val;
+                l1=l1->next;
+            }
+            
+             if(l2!=NULL)
+            {
+                sum+=l2->val;
+                l2=l2->next;
+            }
+            
+            sum+=carry;
+            carry=sum/10;
+            
+            ListNode* node=new ListNode(sum%10);
+            temp->next=node;
+            temp=temp->next;
+            
         }
         
-        return 1;
+        return dummy->next;
         
     }
 };
